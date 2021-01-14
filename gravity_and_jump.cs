@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿//jump mot cach kho hieu
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
