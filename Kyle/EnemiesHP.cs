@@ -35,17 +35,14 @@ public class EnemiesHP : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "My Weapon")
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Hit1") && playerAnim.GetCurrentAnimatorStateInfo(0).IsName("attack"))
-            {
-                nhanSatThuong(30);
-                animator.SetTrigger("gethit");
-            }
+            if (playerAnim.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Hit1"))
+                {
+                    nhanSatThuong(30);
+                    animator.SetTrigger("gethit");
+                }
     }
 
-    private void Update()
-    {
-
-    }
     public void nhanSatThuong(int satThuong)
     {
         satThuong -= giap.getValue();
