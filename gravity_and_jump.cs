@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class gravity_and_jump : MonoBehaviour
 {
-    public GameObject nhanvat;
+    public GameObject raycheck;
     public CharacterController controller;
+    public Animator animator;
     public float lucHut = -9.8f; //phai la so am
     Vector3 playerVelocity;
 
@@ -21,16 +22,17 @@ public class gravity_and_jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool dangdung = nhanvat.GetComponent<checkmatdat>().isGrounded;
-
+        bool dangdung = raycheck.GetComponent<checkmatdat>().isGrounded;
+        //bool dangdung = controller.isGrounded;
         if (dangdung && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
 
-        if (Input.GetButtonDown("Jump") && dangdung)
+        if (Input.GetKeyDown(KeyCode.Space) && dangdung)
         {
-            playerVelocity.y += Mathf.Sqrt(lucNhay * -3.0f * lucHut);
+            playerVelocity.y += Mathf.Sqrt(lucNhay * -4.0f * lucHut);
+            animator.SetTrigger("jump");
         }
 
         playerVelocity.y += lucHut * Time.deltaTime;
