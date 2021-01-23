@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class HP : MonoBehaviour
 {
@@ -7,17 +8,35 @@ public class HP : MonoBehaviour
 
     public HPsystem giap;
     public HPsystem satThuong;
+    public Animator playerAnim;
+
+    public bool chemdc = true;
+
+    IEnumerator battu()
+    {
+        yield return new WaitForSeconds(1f);
+        chemdc = true;
+    }
 
     private void Awake()
     {
         mauHienTai = mauToiDa;
     }
 
-    private void Update()
+    public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        //Debug.Log("co chem dc ko: " + chemdc);
+    }
+
+    private void OnTriggerEnter(Collider vukhi)
+    {
+
+        if (vukhi.tag == "EWeapon" && chemdc)
         {
-            nhanSatThuong(10);
+            nhanSatThuong(5);
+            playerAnim.SetTrigger("Pgethit");
+            chemdc = false;
+            StartCoroutine(battu());
         }
     }
     public void nhanSatThuong (int satThuong)
@@ -36,5 +55,6 @@ public class HP : MonoBehaviour
     public virtual void Chet()
     {
         Debug.Log(transform.name + " da chet.");
+        playerAnim.SetBool("dead",true);
     }
 }

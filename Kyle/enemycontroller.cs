@@ -21,12 +21,9 @@ public class enemycontroller : MonoBehaviour
         if (khoangCach <= tamNhin)
         {
             enemy.SetDestination(target.position);
-            Debug.Log("khoang cach: " + khoangCach);
             if (khoangCach <= enemy.stoppingDistance + 1f)
             {
-                //tan cong
                 enemyAnim.SetTrigger("attack");
-                Debug.Log("dang tan cong");
                 facetarget();
             }
             else

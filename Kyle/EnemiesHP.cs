@@ -12,9 +12,16 @@ public class EnemiesHP : MonoBehaviour
     public HPsystem satThuong;
     NavMeshAgent enemy;
     Collider enemycollider;
+    public Collider weaponcol;
     Animator animator;
     public Animator playerAnim;
+    bool chemdcE = true;
 
+    IEnumerator Ebattu()
+    {
+        yield return new WaitForSeconds(1f);
+        chemdcE = true;
+    }
     IEnumerator tatAnim()
     {
         yield return new WaitForSeconds(2f);
@@ -34,13 +41,13 @@ public class EnemiesHP : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "My Weapon")
-            if (playerAnim.GetCurrentAnimatorStateInfo(0).IsName("attack"))
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Hit1"))
-                {
-                    nhanSatThuong(30);
-                    animator.SetTrigger("gethit");
-                }
+        if (other.tag == "My Weapon" && chemdcE && playerAnim.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+        {
+            nhanSatThuong(20);
+            animator.SetTrigger("gethit");
+            chemdcE = false;
+            StartCoroutine(Ebattu());
+        }
     }
 
     public void nhanSatThuong(int satThuong)
@@ -61,6 +68,7 @@ public class EnemiesHP : MonoBehaviour
         animator.SetBool("dead",true);
         Debug.Log(transform.name + " da chet.");
         enemycollider.enabled = false;
+        weaponcol.enabled = false;
         enemy.enabled = false;
         GetComponent <enemycontroller> ().enabled = false;
         StartCoroutine(tatAnim());
