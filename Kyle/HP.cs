@@ -33,8 +33,15 @@ public class HP : MonoBehaviour
 
         if (vukhi.tag == "EWeapon" && chemdc)
         {
-            nhanSatThuong(5);
-            playerAnim.SetTrigger("Pgethit");
+            if (playerAnim.GetBool("boolBlock"))
+            {
+                playerAnim.SetTrigger("Bgethit");
+            }
+            else
+            {
+                nhanSatThuong(5);
+                playerAnim.SetTrigger("Pgethit"); 
+            }
             chemdc = false;
             StartCoroutine(battu());
         }
