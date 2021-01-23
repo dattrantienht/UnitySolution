@@ -19,7 +19,8 @@ public class dichuyen : MonoBehaviour
             animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree unarmed") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Blend Tree armed")  ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("roll") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Roll_unarmed")
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Roll_unarmed") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Armed-Block-R")
            )
         {
 
@@ -61,11 +62,24 @@ public class dichuyen : MonoBehaviour
                 animator.SetTrigger("rutkiem");
             }
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && rutkiem)
             {
                 animator.SetBool("attack", true);
             }
 
+            if (Input.GetKey(KeyCode.Q) && rutkiem)
+            {
+                Debug.Log("dang hold down");
+                animator.SetBool("boolBlock", true);
+            }
+            else
+            {
+                animator.SetBool("boolBlock", false);
+            }
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                Debug.Log("da tha Q ra");
+            }
         }
     }
 
