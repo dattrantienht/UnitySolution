@@ -55,7 +55,6 @@ public class EnemiesHP : MonoBehaviour
         satThuong -= giap.getValue();
         satThuong = Mathf.Clamp(satThuong, 0, int.MaxValue);
         mauHienTai -= satThuong;
-        Debug.Log(transform.name + " nhan " + satThuong + " sat thuong.");
 
         if (mauHienTai <= 0)
         {
@@ -66,7 +65,6 @@ public class EnemiesHP : MonoBehaviour
     public virtual void Chet()
     {
         animator.SetBool("dead",true);
-        Debug.Log(transform.name + " da chet.");
         enemycollider.enabled = false;
         weaponcol.enabled = false;
         enemy.enabled = false;

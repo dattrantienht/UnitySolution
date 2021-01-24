@@ -6,6 +6,7 @@ public class HP : MonoBehaviour
     public int mauToiDa = 100;
     public int mauHienTai { get; private set; }
 
+    public GameObject player;
     public HPsystem giap;
     public HPsystem satThuong;
     public Animator playerAnim;
@@ -25,7 +26,12 @@ public class HP : MonoBehaviour
 
     public void Update()
     {
-        //Debug.Log("co chem dc ko: " + chemdc);
+        bool chiendau = player.GetComponent<dichuyen>().rutkiem;
+        if (Input.GetKeyDown(KeyCode.H) && (!chiendau))
+        {
+            healing(25);
+            Debug.Log("uong binh mau");
+        }
     }
 
     private void OnTriggerEnter(Collider vukhi)
@@ -39,7 +45,7 @@ public class HP : MonoBehaviour
             }
             else
             {
-                nhanSatThuong(5);
+                nhanSatThuong(10);
                 playerAnim.SetTrigger("Pgethit"); 
             }
             chemdc = false;
@@ -51,7 +57,6 @@ public class HP : MonoBehaviour
         satThuong -= giap.getValue();
         satThuong = Mathf.Clamp(satThuong, 0, int.MaxValue);
         mauHienTai -= satThuong;
-        Debug.Log(transform.name + "nhan " + satThuong + " sat thuong.");
 
         if (mauHienTai <= 0)
         {
@@ -59,9 +64,15 @@ public class HP : MonoBehaviour
         }
     }
 
+    public void healing(int heal)
+    {
+        int maxheal = mauToiDa - mauHienTai;
+        heal = Mathf.Clamp(heal, 0, maxheal);
+        mauHienTai += heal;
+    }
+
     public virtual void Chet()
     {
-        Debug.Log(transform.name + " da chet.");
         playerAnim.SetBool("dead",true);
     }
 }

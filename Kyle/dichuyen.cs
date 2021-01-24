@@ -12,7 +12,7 @@ public class dichuyen : MonoBehaviour
     public float tocdochay = 8f;
     public float xoayMuotTime = 0.1f;
     float tocDoXoayMuot;
-    bool rutkiem = false;
+    public bool rutkiem = false;
     void Update()
     {
         if (
@@ -76,9 +76,15 @@ public class dichuyen : MonoBehaviour
             {
                 animator.SetBool("boolBlock", false);
             }
-            if (Input.GetKeyUp(KeyCode.Q))
+
+            if (Input.GetKeyDown(KeyCode.H) && (!rutkiem))
             {
-                Debug.Log("da tha Q ra");
+                animator.SetTrigger("uong");
+            }
+
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                animator.SetTrigger("bow");
             }
         }
     }
