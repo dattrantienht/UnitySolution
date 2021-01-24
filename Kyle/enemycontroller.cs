@@ -20,6 +20,7 @@ public class enemycontroller : MonoBehaviour
         float khoangCach = Vector3.Distance(target.position,transform.position);
         if (khoangCach <= tamNhin)
         {
+            enemy.isStopped = false;
             enemy.SetDestination(target.position);
             if (khoangCach <= enemy.stoppingDistance + 1f)
             {
@@ -34,6 +35,7 @@ public class enemycontroller : MonoBehaviour
         }
         else
         {
+            enemy.isStopped = true;
             enemyAnim.SetFloat("enemyBlend", 0f, 0.1f, Time.deltaTime);
         }
     }
