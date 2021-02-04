@@ -56,8 +56,8 @@ public class enable_chest_UI : MonoBehaviour
         if (timeHientai >= pickupTime)
         {
             Debug.Log("da mo hom");
-            //player.GetComponent<gold>().goldNum += 25;
             StartCoroutine(tangGold(2,20));
+            player.GetComponent<potion>().PotionNum += 2;
             chestAnim.enabled = true;
             triggCol.enabled = false;
             chestUI.gameObject.SetActive(false);

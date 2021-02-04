@@ -4,9 +4,11 @@ using UnityEngine;
 public class HP : MonoBehaviour
 {
     public int mauToiDa = 100;
-    public int mauHienTai { get; private set; }
+    public int mauHienTai { get; set; }
 
     public GameObject player;
+    public GameObject dieUI;
+    public GameObject gameUI;
     public HPsystem giap;
     public HPsystem satThuong;
     public Animator playerAnim;
@@ -24,6 +26,13 @@ public class HP : MonoBehaviour
         chemdc = true;
     }
 
+    IEnumerator showDIE()
+    {
+        yield return new WaitForSeconds(1.5f);
+        dieUI.SetActive(true);
+        gameUI.SetActive(false);
+    }
+
     private void Awake()
     {
         mauHienTai = mauToiDa;
@@ -32,9 +41,10 @@ public class HP : MonoBehaviour
     public void Update()
     {
         bool chiendau = player.GetComponent<playercontroller>().rutkiem;
-        if (Input.GetKeyDown(KeyCode.H) && (!chiendau))
+        if (Input.GetKeyDown(KeyCode.H) && (!chiendau) && player.GetComponent<potion>().PotionNum > 0)
         {
             StartCoroutine(tangMau(2, 25));
+            uongThuoc();
             Debug.Log("uong binh mau");
         }
     }
@@ -69,6 +79,12 @@ public class HP : MonoBehaviour
         }
     }
 
+    public void uongThuoc()
+    {
+        player.GetComponent<potion>().PotionNum = Mathf.Clamp(player.GetComponent<potion>().PotionNum,0,30); 
+        player.GetComponent<potion>().PotionNum -= 1;
+    }
+
     IEnumerator tangMau(int dur, int mau)
     {
         int maxheal = mauToiDa - mauHienTai;
@@ -87,6 +103,7 @@ public class HP : MonoBehaviour
     public virtual void Chet()
     {
         playerAnim.SetBool("dead",true);
+        StartCoroutine(showDIE());
         //controller.enabled = false;
         //GetComponent<dichuyen>().enabled = false;
     }

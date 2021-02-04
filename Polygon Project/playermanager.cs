@@ -15,4 +15,9 @@ public class playermanager : MonoBehaviour
     #endregion
 
     public GameObject player;
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }

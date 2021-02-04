@@ -8,6 +8,7 @@ public class playercontroller : MonoBehaviour
     public Animator animator;
     public Transform cam;
     public GameObject potion;
+    public GameObject player;
     float tocDo;
     public float tocdodi = 3f;
     public float tocdochay = 8f;
@@ -78,7 +79,7 @@ public class playercontroller : MonoBehaviour
                 animator.SetBool("boolBlock", false);
             }
 
-            if (Input.GetKeyDown(KeyCode.H) && (!rutkiem))
+            if (Input.GetKeyDown(KeyCode.H) && (!rutkiem) && player.GetComponent<potion>().PotionNum >0)
             {
                 animator.SetTrigger("uong");
             }

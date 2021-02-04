@@ -7,10 +7,11 @@ using TMPro;
 public class gold : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI goldNumber;
-    public int goldNum = 20;
-
+    [HideInInspector] public int goldNum = 0;
     void Update()
     {
         goldNumber.text = goldNum.ToString();
     }
+
+   
 }
