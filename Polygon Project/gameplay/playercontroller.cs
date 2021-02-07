@@ -79,11 +79,6 @@ public class playercontroller : MonoBehaviour
                 animator.SetBool("boolBlock", false);
             }
 
-            if (Input.GetKeyDown(KeyCode.H) && (!rutkiem) && player.GetComponent<potion>().PotionNum >0)
-            {
-                animator.SetTrigger("uong");
-            }
-
             if (Input.GetKeyDown(KeyCode.V))
             {
                 animator.SetTrigger("bow");

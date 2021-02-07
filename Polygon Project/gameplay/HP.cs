@@ -43,6 +43,7 @@ public class HP : MonoBehaviour
         bool chiendau = player.GetComponent<playercontroller>().rutkiem;
         if (Input.GetKeyDown(KeyCode.H) && (!chiendau) && player.GetComponent<potion>().PotionNum > 0)
         {
+            playerAnim.SetTrigger("uong");
             StartCoroutine(tangMau(2, 25));
             uongThuoc();
             Debug.Log("uong binh mau");

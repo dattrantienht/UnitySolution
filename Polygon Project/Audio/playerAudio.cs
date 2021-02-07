@@ -16,7 +16,7 @@ public class playerAudio : MonoBehaviour
     {
         if(playerAnim.GetFloat("speedpercent")>0.1f && playerAnim.GetFloat("speedpercent")<0.6f)
         {
-            Debug.Log("ham buoc chan dc goi");
+            //Debug.Log("ham buoc chan dc goi");
             //AudioSource.PlayOneShot(tiengbuocchan, 0.7f);
 
             FindObjectOfType<AudioManager>().Play("tieng_buoc_chan");
@@ -30,5 +30,10 @@ public class playerAudio : MonoBehaviour
             Debug.Log("ham chay dc goi");
             FindObjectOfType<AudioManager>().Play("tieng_chay");
         }
+    }
+
+    void rut_kiem()
+    {
+        FindObjectOfType<AudioManager>().Play("tieng_rut_kiem");
     }
 }
